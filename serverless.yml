@@ -1,0 +1,23 @@
+service: get-ip
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  architecture: arm64
+  region: us-east-2
+  apiGateway:
+    apiKeys:
+      - getIpKey
+
+plugins:
+  - serverless-offline
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: /
+          method: get
+          private: true
